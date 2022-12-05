@@ -1,7 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
 
-export default function Home() {
+import { useEffect } from "react";
+
+const API_KEY = process.env.GIPHY_API;
+
+export default function Home(initialData) {
+  useEffect(() => {
+    console.log(initialData);
+  });
+
   return (
     <div className="container">
       <Head>
@@ -13,4 +21,12 @@ export default function Home() {
       <h1>Search Giphy</h1>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  let catGiphys = await fetch(
+    `https://api.giphy.com/v1/gifs/search?q=cats&api_key=${API_KEY}&limit=10`
+  );
+  catGiphys = await catGiphys.json();
+  return { props: { catGiphys: catGiphys } };
 }
