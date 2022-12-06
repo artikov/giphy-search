@@ -9,3 +9,12 @@ body {
   margin: auto;
   padding: 0px 40px;
 }
+
+.giphy-search-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+img {
+  width: 100%;
+}

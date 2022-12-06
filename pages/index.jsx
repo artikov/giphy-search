@@ -19,6 +19,16 @@ export default function Home(initialData) {
         <link rel="stylesheet" href="/styles.css" />
       </Head>
       <h1>Search Giphy</h1>
+      <div className="giphy-search-results">
+        {initialData.catGiphys.data.map((item, index) => {
+          return (
+            <div key={index}>
+              <h3>{item.title}</h3>
+              <img src={item.images.original.url} alt={item.title} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
