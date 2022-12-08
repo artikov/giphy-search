@@ -10,6 +10,16 @@ export default function Home(initialData) {
     console.log(initialData);
   });
 
+  const handleInput = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.name);
+  };
+
+  const search = (event) => {
+    event.preventDefault();
+    console.log(formInputs.searchTerm);
+  };
+
   return (
     <div className="container">
       <Head>
@@ -18,7 +28,14 @@ export default function Home(initialData) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/styles.css" />
       </Head>
+
       <h1>Search Giphy</h1>
+
+      <form onSubmit={search}>
+        <input name="searchTerm" onChange={handleInput} type="text" />
+        <button>Search</button>
+      </form>
+
       <div className="giphy-search-results">
         {initialData.catGiphys.data.map((item, index) => {
           return (
