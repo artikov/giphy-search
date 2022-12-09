@@ -1,23 +1,33 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const API_KEY = process.env.GIPHY_API;
+const API_KEY = process.env.NEXT_PUBLIC_GIPHY_API;
 
 export default function Home(initialData) {
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("cats");
+  const [formInputs, setFormInputs] = useState();
+
   useEffect(() => {
-    console.log(initialData);
-  });
+    setSearchResults(initialData.catGiphys.data);
+  }, [initialData]);
 
   const handleInput = (event) => {
-    console.log(event.target.value);
-    console.log(event.target.name);
+    let { value, name } = event.target;
+    setFormInputs({ ...formInputs, [name]: value });
   };
 
-  const search = (event) => {
+  const search = async (event) => {
     event.preventDefault();
-    console.log(formInputs.searchTerm);
+    let giphys = await fetch(
+      `https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=${API_KEY}&limit=10`
+    );
+    giphys = await giphys.json();
+    console.log(giphys);
+    setSearchResults(giphys.data);
+    setSearchTerm(formInputs.searchTerm);
   };
 
   return (
@@ -36,11 +46,12 @@ export default function Home(initialData) {
         <button>Search</button>
       </form>
 
+      <h1>Search results for: {searchTerm}</h1>
       <div className="giphy-search-results">
-        {initialData.catGiphys.data.map((item, index) => {
+        {searchResults.map((item, index) => {
           return (
             <div key={index}>
-              <h3>{item.title}</h3>
+              <h3>{item.title.substring(0, item.title.indexOf("GIF"))}</h3>
               <img src={item.images.original.url} alt={item.title} />
             </div>
           );
