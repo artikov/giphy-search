@@ -61,7 +61,7 @@ export default function Home(initialData) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   let catGiphys = await fetch(
     `https://api.giphy.com/v1/gifs/search?q=cats&api_key=${API_KEY}&limit=10`
   );
