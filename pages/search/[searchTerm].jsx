@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const API_KEY = process.env.NEXT_PUBLIC_GIPHY_API;
 
@@ -12,6 +13,9 @@ export default function Search(initialData) {
         <title>Search</title>
         <link rel="stylesheet" href="/styles.css" />
       </Head>
+      <p>
+        GO <Link href="/">Home</Link>
+      </p>
       <h1>Search results for: {router.query.searchTerm}</h1>
 
       <div className="giphy-search-results">

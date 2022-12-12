@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 import { useEffect, useState } from "react";
 
@@ -47,6 +48,15 @@ export default function Home(initialData) {
       </form>
 
       <h1>Search results for: {searchTerm}</h1>
+
+      <p>
+        Share the result:{" "}
+        <Link
+          href="/search/[pid]"
+          as={`/search/${searchTerm}`}
+        >{`http://localhost:3000/search/${searchTerm}`}</Link>
+      </p>
+
       <div className="giphy-search-results">
         {searchResults.map((item, index) => {
           return (
