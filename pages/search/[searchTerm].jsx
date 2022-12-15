@@ -11,7 +11,11 @@ export default function Search(initialData) {
   return (
     <>
       <Head>
-        <title>Search</title>
+        <title>Search results for: {router.query.searchTerm}</title>
+        <meta
+          name="description"
+          content={initialData.giphys.map((item, index) => item.title + " ")}
+        />
         <link rel="stylesheet" href="/styles.css" />
       </Head>
       <p>
