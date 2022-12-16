@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
 
+// import giphyLogo from "../public/giphy-logo.png";
+
 import { useEffect, useState } from "react";
 
 const API_KEY = process.env.NEXT_PUBLIC_GIPHY_API;
@@ -41,6 +43,16 @@ export default function Home(initialData) {
           <link rel="icon" href="/favicon.ico" />
           <link rel="stylesheet" href="/styles.css" />
         </Head>
+
+        <div className="logo-container">
+          <Image
+            src="/giphy-logo.png"
+            alt="logo"
+            unsized
+            width={256}
+            height={256}
+          />
+        </div>
 
         <h1>Search Giphy</h1>
 
